@@ -1,7 +1,7 @@
 #region License
 /* SDL2# - C# Wrapper for SDL2
  *
- * Copyright (c) 2013-2021 Ethan Lee.
+ * Copyright (c) 2013-2024 Ethan Lee.
  *
  * This software is provided 'as-is', without any express or implied warranty.
  * In no event will the authors be held liable for any damages arising from
@@ -1908,6 +1908,14 @@ namespace SDL2
 		/* window refers to an SDL_Window* */
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void SDL_GetWindowSize(
+			IntPtr window,
+			out int w,
+			out int h
+		);
+
+		/* window refers to an SDL_Window* */
+		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void SDL_GetWindowSizeInPixels(
 			IntPtr window,
 			out int w,
 			out int h
@@ -4689,15 +4697,15 @@ namespace SDL2
 		/* These are for SDL_LoadBMP, which is a macro in the SDL headers. */
 		/* IntPtr refers to an SDL_Surface* */
 		/* THIS IS AN RWops FUNCTION! */
-		[DllImport(nativeLibName, EntryPoint = "SDL_LoadBMP_RW", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr INTERNAL_SDL_LoadBMP_RW(
+		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern IntPtr SDL_LoadBMP_RW(
 			IntPtr src,
 			int freesrc
 		);
 		public static IntPtr SDL_LoadBMP(string file)
 		{
 			IntPtr rwops = SDL_RWFromFile(file, "rb");
-			return INTERNAL_SDL_LoadBMP_RW(rwops, 1);
+			return SDL_LoadBMP_RW(rwops, 1);
 		}
 
 		/* surface refers to an SDL_Surface* */
@@ -4725,8 +4733,8 @@ namespace SDL2
 		/* These are for SDL_SaveBMP, which is a macro in the SDL headers. */
 		/* IntPtr refers to an SDL_Surface* */
 		/* THIS IS AN RWops FUNCTION! */
-		[DllImport(nativeLibName, EntryPoint = "SDL_SaveBMP_RW", CallingConvention = CallingConvention.Cdecl)]
-		private static extern int INTERNAL_SDL_SaveBMP_RW(
+		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern int SDL_SaveBMP_RW(
 			IntPtr surface,
 			IntPtr src,
 			int freesrc
@@ -4734,7 +4742,7 @@ namespace SDL2
 		public static int SDL_SaveBMP(IntPtr surface, string file)
 		{
 			IntPtr rwops = SDL_RWFromFile(file, "wb");
-			return INTERNAL_SDL_SaveBMP_RW(surface, rwops, 1);
+			return SDL_SaveBMP_RW(surface, rwops, 1);
 		}
 
 		/* surface refers to an SDL_Surface* */
@@ -8207,8 +8215,8 @@ namespace SDL2
 
 		/* audio_buf refers to a malloc()'d buffer, IntPtr to an SDL_AudioSpec* */
 		/* THIS IS AN RWops FUNCTION! */
-		[DllImport(nativeLibName, EntryPoint = "SDL_LoadWAV_RW", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr INTERNAL_SDL_LoadWAV_RW(
+		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern IntPtr SDL_LoadWAV_RW(
 			IntPtr src,
 			int freesrc,
 			out SDL_AudioSpec spec,
@@ -8222,7 +8230,7 @@ namespace SDL2
 			out uint audio_len
 		) {
 			IntPtr rwops = SDL_RWFromFile(file, "rb");
-			return INTERNAL_SDL_LoadWAV_RW(
+			return SDL_LoadWAV_RW(
 				rwops,
 				1,
 				out spec,
@@ -8943,8 +8951,8 @@ namespace SDL2
 		[StructLayout(LayoutKind.Sequential)]
 		public struct SDL_Locale
 		{
-			IntPtr language;
-			IntPtr country;
+			public IntPtr language; /* char* */
+			public IntPtr country; /* char* */
 		}
 
 		/* IntPtr refers to an SDL_Locale*.
