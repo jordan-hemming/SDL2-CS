@@ -3230,12 +3230,26 @@ namespace SDL2
 			int num_indices
 		);
 
-		/* renderer refers to an SDL_Renderer*
+        /* renderer refers to an SDL_Renderer*
+		 * texture refers to an SDL_Texture*
+		 * Only available in 2.0.18 or higher.
+		 */
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_RenderGeometry(
+            IntPtr renderer,
+            IntPtr texture,
+            [In] SDL_Vertex[] vertices,
+            int num_vertices,
+            IntPtr indices,
+            int num_indices
+        );
+
+        /* renderer refers to an SDL_Renderer*
 		 * texture refers to an SDL_Texture*
 		 * indices refers to a void*
 		 * Only available in 2.0.18 or higher.
 		 */
-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int SDL_RenderGeometryRaw(
 			IntPtr renderer,
 			IntPtr texture,
