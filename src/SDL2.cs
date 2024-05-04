@@ -2957,8 +2957,16 @@ namespace SDL2
 			int count
 		);
 
-		/* renderer refers to an SDL_Renderer* */
-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        /* renderer refers to an SDL_Renderer* */
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_RenderDrawLines(
+            IntPtr renderer,
+            IntPtr points,
+            int count
+        );
+
+        /* renderer refers to an SDL_Renderer* */
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int SDL_RenderDrawPoint(
 			IntPtr renderer,
 			int x,
@@ -2973,8 +2981,16 @@ namespace SDL2
 			int count
 		);
 
-		/* renderer refers to an SDL_Renderer* */
-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        /* renderer refers to an SDL_Renderer* */
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_RenderDrawPoints(
+            IntPtr renderer,
+            IntPtr points,
+            int count
+        );
+
+        /* renderer refers to an SDL_Renderer* */
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int SDL_RenderDrawRect(
 			IntPtr renderer,
 			ref SDL_Rect rect
@@ -3246,6 +3262,20 @@ namespace SDL2
 
         /* renderer refers to an SDL_Renderer*
 		 * texture refers to an SDL_Texture*
+		 * Only available in 2.0.18 or higher.
+		 */
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_RenderGeometry(
+            IntPtr renderer,
+            IntPtr texture,
+            IntPtr vertices,
+            int num_vertices,
+            IntPtr indices,
+            int num_indices
+        );
+
+        /* renderer refers to an SDL_Renderer*
+		 * texture refers to an SDL_Texture*
 		 * indices refers to a void*
 		 * Only available in 2.0.18 or higher.
 		 */
@@ -3281,8 +3311,16 @@ namespace SDL2
 			int count
 		);
 
-		/* renderer refers to an SDL_Renderer* */
-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        /* renderer refers to an SDL_Renderer* */
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_RenderDrawPointsF(
+            IntPtr renderer,
+            IntPtr points,
+            int count
+        );
+
+        /* renderer refers to an SDL_Renderer* */
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int SDL_RenderDrawLineF(
 			IntPtr renderer,
 			float x1,
@@ -3299,8 +3337,16 @@ namespace SDL2
 			int count
 		);
 
-		/* renderer refers to an SDL_Renderer* */
-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        /* renderer refers to an SDL_Renderer* */
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_RenderDrawLinesF(
+            IntPtr renderer,
+            IntPtr points,
+            int count
+        );
+
+        /* renderer refers to an SDL_Renderer* */
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int SDL_RenderDrawRectF(
 			IntPtr renderer,
 			ref SDL_FRect rect
